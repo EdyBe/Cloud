@@ -5,7 +5,7 @@ const studentRoutes = require('./routes/studentRoutes');
 const teacherRoutes = require('./routes/teacherRoutes');
 
 const app = express();
-const port = 3000;
+const port = 10000;
 
 app.use(bodyParser.json());  // Parse JSON requests
 
@@ -15,5 +15,5 @@ app.use('/api/student', studentRoutes);
 app.use('/api/teacher', teacherRoutes);
 
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+  console.log(`Server running at https://cloud-fecy.onrender.com`);
 });
