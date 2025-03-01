@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Videos</title>
+</head>
+<body>
+  <h1>Your Videos</h1>
+  <div id="videosContainer"></div>
+
+  <script>
+    async function fetchStudentVideos() {
+      const response = await fetch('/api/student/videos?userId=1');  // Example userId
+      const data = await response.json();
+
+      const container = document.getElementById('videosContainer');
+      for (const [classCode, videos] of Object.entries(data)) {
+        const classDiv = document.createElement('div');
+        const classTitle = document.createElement('h3');
+        classTitle.textContent = classCode;
+        classDiv.appendChild(classTitle);
+
+        videos.forEach(videoId => {
+          const videoElement = document.createElement('video');
+          videoElement.src = `https://videodelivery.net/${videoId}/manifest/video.m3u8`;
+          videoElement.controls = true;
+          classDiv.appendChild(videoElement);
+        });
+
+        container.appendChild(classDiv);
+      }
+    }
+
+    fetchStudentVideos();
+  </script>
+</body>
+</html>
